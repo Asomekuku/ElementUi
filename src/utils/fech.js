@@ -1,7 +1,7 @@
 import axios from 'axios'
-
+let baseURL_dev='http://localhost:8090/api' //本地地址
 const instance = axios.create({
-    baseURL: '',
+    baseURL: baseURL_dev,
     timeout: 7000,
     // headers: {'X-Custom-Header': 'foobar'}
   });

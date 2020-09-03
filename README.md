@@ -22,4 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-## 项目启动
+## 项目启动 //2020.9.2
+
+## views/good 商品相关
