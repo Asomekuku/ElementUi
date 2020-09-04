@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <!-- <router-link to='/home'>123</router-link>
-    <router-link to="/login">登录</router-link> -->
-    <router-view></router-view>
+    
+    <router-view v-if="this.$route.path=='/login'"  name="login"></router-view>
+    <Home v-else />
   </div>
 </template>
 
 <script>
 
-
+import Home from '@/views/layout/Home.vue'
 export default {
   name: 'App',
   components: {
-    
+    Home
+  },
+  mounted(){
+    console.log(this.$route)
   }
 }
 </script>

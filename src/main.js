@@ -8,7 +8,7 @@ Vue.use(ElementUI);
 
 
 import router from '@/router/'
-import vuex from '@/store/'
+import store from '@/store/'
 
 //把调接口方法放在vue原型上
 import http from '@/utils/api'
@@ -17,6 +17,6 @@ Vue.prototype.$http=http
 
 new Vue({
   router,
-  vuex,
+  store,
   render: h => h(App),
 }).$mount('#app')

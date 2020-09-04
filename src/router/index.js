@@ -1,21 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-const Home=()=>import('@/views/Home.vue')
+
 const Login=()=>import('@/components/common/login/login.vue')
-
 const Cate=()=>import('@/views/good/Cate.vue')
-const theQuery=()=>import('@/views/good/theQuery.vue')
+//路由管理
+let arr=[]
+import {list} from '@/components/'
+console.log(list)
+list.map(item=>{
+    if(item.children){
+        item.children.map(li=>{
+            arr.push({path:li.path,component:li.component})
 
-
+        })
+    }
+})
+console.log(arr)
+// console.log(this.$store)
 const router =new VueRouter({
     routes :[
-        {path:'/home',component:Home,children:[
-            {path:'cate',component:Cate},
-            {path:'thequery',component:theQuery}
-        ]},
-        {path:'/login',component:Login},
-        {path:'/*',redirect:'/login'}
+
+        ...arr,
+        {path:'/cate',component:Cate},
+        {path:'/login',components:{'login':Login}},
+        {path:'*',redirect:'/login'}
     ]
 })
 
@@ -23,27 +32,5 @@ const router =new VueRouter({
 
 
 
-// router.beforeEach((to, from, next) => {
-//     console.log(to,from,next())
-//     //证明登陆了
-//     if(from.path==='/login'){
-//         let token=localStorage.getItem('token')
-//         if(token){
-//             next()
-//         }
-//         console.log(token)
-//     }
-//     if(to.path==='/home'){
-//         let token=localStorage.getItem('token')
-//         if(token){
-//             next()
-//         }else{
-//             next('/login')
-//         }
-//         console.log(token)
 
-//     }
-      
-    
-//   })
 export default router

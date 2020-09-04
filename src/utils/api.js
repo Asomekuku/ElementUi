@@ -32,10 +32,19 @@ export function fetchSearch(data){
         data
     })
 }
+//添加商品
+export function fetchAddShop(data){
+    return axios({
+        url:'goods/addshop',
+        method:'POST',
+        data
+    })
+}
 
 export default {
     fetchLogin,
     fetchAddCate,
     fetchGetCate,
-    fetchSearch
+    fetchSearch,
+    fetchAddShop
 }
