@@ -93,8 +93,9 @@
         <el-col :span="2" :offset='5'>
         </el-col>
         <el-col :span="8">
-                <el-button type="primary" @click="catesubmit">提交</el-button>
-                <el-button type="primary" @click="catesubmit">修改</el-button>
+                <el-button type="primary" @click="catesubmit" >{{this.btnName}}</el-button>
+                
+                
         </el-col>
       </el-row>
 
@@ -102,24 +103,29 @@
 </template>
 
 <script>
-import {mapActions , mapState} from 'vuex'
+
 import {cateSelect} from '@/components/'
 export default {
     components:{
         cateSelect
     },
     mounted(){
+        //编辑内容
         let id=this.$route.params.id
-        if(id){
+        if(id && id != ':id'){
             //存在id
             this.$http.fetchDetail({id}).then(res=>{
-                console.log(res)
+               
+                this.info=res.data.data
+                
             })
+            this.btnName='修改'
+        }else{
+            this.btnName='添加'
         }
+        console.log(this.$route)
     },
-    computed:{
-        ...mapState('good',['list'])
-    },
+ 
     data(){
         return {
             category:'',//中文商品品类
@@ -135,39 +141,35 @@ export default {
                 rank:'',
                 price:''
             },
-           
+           btnName:'添加'
         }
     },
     methods:{
-        //找到状态管理 good子模块，actions方法里面的ac_list
-        ...mapActions('good',['ac_list']),
+        
         //提交
         catesubmit(){
-        //   let id =this.$route.params.id
-        //   if(id){
+          let id =this.$route.params.id
+          let data=this.info
 
-        //   }else{
-
-        //   }
-            this.$http.fetchAddShop(this.info).then(res=>{
-                console.log(res)
-                    this.info={
-                    name:'',
-                    cate:'',
-                    img:'',
-                    desc:'',
-                    hot:false,
-                    rank:'',
-                    price:''
-                }
+          if(id && id != ':id'){
+                data.id=id
+               this.$http.fetchAddShop(data).then(res=>{ 
+                   console.log(res)
+                })
+                this.btnName='修改'
+          }else{
+               this.$http.fetchAddShop(data).then(res=>{
+                       console.log(res)
             })
-                     
+            this.btnName='添加'
+          }       
+                
         },
+     
+   
         //图片上传成功
-        imgUpload(res){
-            console.log(res,'成功')
+        imgUpload(res){          
             this.info.img=res.data.url
-            console.log(res.data.url)
         }
         
      

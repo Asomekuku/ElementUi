@@ -60,7 +60,7 @@ export default {
         //查询
         search(){
             this.$http.fetchSearch({cate:this.shop_name}).then(res=>{
-                console.log(res)
+                
                 if(res.data.err){
                     //有错误
                     this.$message.error('错了哦，这是一条错误消息')

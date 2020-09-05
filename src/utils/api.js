@@ -56,6 +56,14 @@ export function fetchDetail(params){
         params
     })
 }
+//删除商品
+export function fetchDelCate(params){
+    return axios({
+        url:'goods/del',
+        method:'GET',
+        params
+    })
+}
 export default {
     fetchLogin,
     fetchAddCate,
@@ -63,5 +71,6 @@ export default {
     fetchSearch,
     fetchAddShop,
     fetchLonkingCate,
-    fetchDetail
+    fetchDetail,
+    fetchDelCate
 }

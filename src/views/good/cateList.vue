@@ -77,7 +77,7 @@
                         <el-button
                         size="mini"
                         type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        @click="delClick1(scope.row)">删除</el-button>
                     </template>
                     </el-table-column>
                 </el-table>
@@ -118,7 +118,8 @@ export default {
             cateValue:'',//品类值
             tableData:[],//商品列表数据
             page:1,
-            total:1
+            total:1,
+           
         }
     },
     methods:{
@@ -140,18 +141,25 @@ export default {
         },
         //改变页码触发
         pageChange(page){
-
             this.page=page
             this.LonkingCate()
         },
+        //删除
+        delClick1(row){
+      
+            this.$http.fetchDelCate({id:row._id}).then(res=>{
+                console.log(res)
+                this. LonkingCate()
+            })
+        },
         //编辑
-        handleEdit(row){
-            console.log(row)
-            this.$router.push('/cate/'+row._id)
-            console.log(this.$router)
-            console.log(this.$route)
-        }
+        handleEdit(row){     
+            //跳转带上id
+            this.$router.push('/cate/'+row._id)         
+        },
+     
     },
+    //监听器
     watch:{
         cateValue(){
             this.page=1//调接口先把页码归位
