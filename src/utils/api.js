@@ -40,11 +40,28 @@ export function fetchAddShop(data){
         data
     })
 }
-
+//获取商品列表
+export function fetchLonkingCate(params){
+    return axios({
+        url:'goods/lonkingCate',
+        method:'GET',
+        params
+    })
+}
+//获取商品详情
+export function fetchDetail(params){
+    return axios({
+        url:'goods/detail',
+        method:'GET',
+        params
+    })
+}
 export default {
     fetchLogin,
     fetchAddCate,
     fetchGetCate,
     fetchSearch,
-    fetchAddShop
+    fetchAddShop,
+    fetchLonkingCate,
+    fetchDetail
 }

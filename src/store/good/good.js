@@ -3,11 +3,15 @@ import {fetchGetCate} from '@/utils/api'
 export default{
     namespaced:true,
     state:{
-        list:[]
+        list:[],
+     
     },
     mutations:{
         mu_list(state,payload){
             state.list=payload.data.data.list
+        },
+        ModifyCateDate(state,cateDate){
+            state.cateData=cateDate
         }
     },
     actions:{

@@ -1,6 +1,6 @@
 <template>
   <div class="cateSelect">
-      <template>
+   
         <el-select :value='value' @change="cateChange" placeholder="请选择">
             <el-option
             v-for="cate in cateList"
@@ -9,11 +9,12 @@
             :value="cate.cate">
             </el-option>
         </el-select>
-        </template>
+     
   </div>
 </template>
 
 <script>
+import {mapMutations, mapState} from 'vuex'
 export default {
   props:{
     value:{
@@ -21,22 +22,35 @@ export default {
       required:true
     }
   },
+  computed:{
+    ...mapState('good',['cateData'])
+  },
   data(){
     return{
       cateList:[]
     }
   },
   methods:{
+    //vuex方法
+    ...mapMutations('good',['ModifyCateDate']),
     cateChange(val){
       this.$emit('input',val)
-      console.log(val)
+    
+      //共享品类的cate
+        this.ModifyCateDate(val)
     },
     addCateList(){
+      //获取品类
         this.$http.fetchGetCate({}).then(res=>{
+          //得到品类
         this.cateList=res.data.data.list
-        console.log(res,this.cateList)
+        
+       
+       
       })
-    }
+    },
+    //
+   
   },
   mounted(){
     this.addCateList()

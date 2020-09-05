@@ -36,7 +36,7 @@
         </el-col>
       </el-row>
       <!-- 4 -->
-      <el-row type='flex' align='middle'>
+      <el-row type='flex' justify="start" align='middle'>
         <el-col :span="2" :offset='5'>
             <span>商品品类:</span>
         </el-col>
@@ -50,7 +50,16 @@
             <span>商品图片:</span>
         </el-col>
         <el-col :span="8">
-            <el-input v-model="info.img" placeholder="图片"></el-input>
+            <!-- <el-input v-model="info.img" placeholder="图片"></el-input> -->
+            <el-upload
+                class="avatar-uploader"
+                action="http://localhost:8090/api/upload/img"
+                :show-file-list="false"
+                :on-success="imgUpload"
+                >
+                <img v-if="info.img" :src='"http://localhost:3000"+info.img' class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
         </el-col>
       </el-row>
       <!-- 6 -->
@@ -85,6 +94,7 @@
         </el-col>
         <el-col :span="8">
                 <el-button type="primary" @click="catesubmit">提交</el-button>
+                <el-button type="primary" @click="catesubmit">修改</el-button>
         </el-col>
       </el-row>
 
@@ -99,7 +109,13 @@ export default {
         cateSelect
     },
     mounted(){
-        this.int()
+        let id=this.$route.params.id
+        if(id){
+            //存在id
+            this.$http.fetchDetail({id}).then(res=>{
+                console.log(res)
+            })
+        }
     },
     computed:{
         ...mapState('good',['list'])
@@ -118,7 +134,8 @@ export default {
                 hot:false,
                 rank:'',
                 price:''
-            }
+            },
+           
         }
     },
     methods:{
@@ -126,19 +143,32 @@ export default {
         ...mapActions('good',['ac_list']),
         //提交
         catesubmit(){
-            //需要封装到状态管理里面
+        //   let id =this.$route.params.id
+        //   if(id){
+
+        //   }else{
+
+        //   }
             this.$http.fetchAddShop(this.info).then(res=>{
                 console.log(res)
-                this.info
+                    this.info={
+                    name:'',
+                    cate:'',
+                    img:'',
+                    desc:'',
+                    hot:false,
+                    rank:'',
+                    price:''
+                }
             })
                      
         },
-        int(){
-            //如果list列表有数据不用重新调接口
-            if(this.list.length==0){
-                 this.ac_list({})
-            }     
-        },
+        //图片上传成功
+        imgUpload(res){
+            console.log(res,'成功')
+            this.info.img=res.data.url
+            console.log(res.data.url)
+        }
         
      
        
@@ -164,5 +194,28 @@ export default {
     .el-row {
         margin-top: 20px;
     }
+   .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 }
 </style>

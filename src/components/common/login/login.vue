@@ -48,14 +48,14 @@ methods: {
             password:this.pwd
         }
         this.$http.fetchLogin(data).then(res=>{
-            console.log(res)
+            
             //登录成功
             if(res.status==200){
                 if(res.data.err==0){
                     this.$router.push('/cate')
                     localStorage.setItem('token',res.data.data.token)
                     localStorage.setItem('name',res.data.data.username)
-                    console.log(res)
+                  
                 }else{
                     alert('账号密码错误')
                 }

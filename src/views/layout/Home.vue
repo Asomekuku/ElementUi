@@ -24,7 +24,7 @@ export default {
     tabbarLeft
   },
   mounted(){
-    console.log(this.$store)
+    
   }
 }
 </script>

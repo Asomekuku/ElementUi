@@ -13,7 +13,7 @@ const list=[
         text:'商品管理',
         icon:'el-icon-location',
         children:[
-            {id:1-1,text:'商品新增',path:'/cate',component:Cate,icon:'el-icon-circle-plus'},
+            {id:1-1,text:'商品新增',path:'/cate/:id',component:Cate,icon:'el-icon-circle-plus'},
             {id:1-2,text:'商品列表',path:'/catelist',component:cateList,icon:'el-icon-menu'},
             {id:1-3,text:'商品查询',path:'/thequery',component:theQuery,icon:'el-icon-zoom-in'},
         ]
