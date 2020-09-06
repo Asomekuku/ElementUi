@@ -64,6 +64,14 @@ export function fetchDelCate(params){
         params
     })
 }
+//查询商品
+export function fetchGetName(params){
+    return axios({
+        url:'goods/getname',
+        method:'GET',
+        params
+    })
+}
 export default {
     fetchLogin,
     fetchAddCate,
@@ -72,5 +80,6 @@ export default {
     fetchAddShop,
     fetchLonkingCate,
     fetchDetail,
-    fetchDelCate
+    fetchDelCate,
+    fetchGetName
 }

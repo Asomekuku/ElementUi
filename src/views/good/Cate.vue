@@ -153,17 +153,32 @@ export default {
 
           if(id && id != ':id'){
                 data.id=id
-               this.$http.fetchAddShop(data).then(res=>{ 
-                   console.log(res)
+               this.$http.fetchAddShop(data).then(()=>{ 
+                   this.$message({
+                    message: '修改成功',
+                    type: 'success'
+                    });
                 })
                 this.btnName='修改'
           }else{
-               this.$http.fetchAddShop(data).then(res=>{
-                       console.log(res)
+               this.$http.fetchAddShop(data).then(()=>{
+                      this.$message({
+                    message: '添加成功',
+                    type: 'success'
+                    });
             })
             this.btnName='添加'
-          }       
-                
+          }
+
+                this.info={
+                name:'',
+                cate:'',
+                img:'',
+                desc:'',
+                hot:false,
+                rank:'',
+                price:''
+            }
         },
      
    

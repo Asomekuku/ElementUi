@@ -6,7 +6,20 @@
       </el-aside>
 
         <el-container>
-          <el-header>Header</el-header>
+          <el-header>
+            <el-row type="flex" align="middle" justify="end">
+              <el-col :span="1">
+                  <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+              </el-col>
+              <el-col :span="1">
+                  <span class="tuichi" @click="out">退出<i class="el-icon-error"></i></span>
+              </el-col>
+            </el-row>
+                            
+                  
+                
+                
+          </el-header>
 
           <el-main>
             <router-view></router-view>
@@ -25,6 +38,14 @@ export default {
   },
   mounted(){
     
+  },
+  methods:{
+    //退出
+    out(){
+      localStorage.removeItem('token')
+      localStorage.removeItem('name')
+      this.$router.push('/login')
+    }
   }
 }
 </script>
@@ -35,6 +56,9 @@ export default {
   height: 100%;
   .el-container{
     height: 100%;
+  }
+  .tuichi{
+    cursor: pointer;
   }
 }
 

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapMutations, mapState} from 'vuex'
+
 export default {
   props:{
     value:{
@@ -23,7 +23,7 @@ export default {
     }
   },
   computed:{
-    ...mapState('good',['cateData'])
+   
   },
   data(){
     return{
@@ -31,25 +31,20 @@ export default {
     }
   },
   methods:{
-    //vuex方法
-    ...mapMutations('good',['ModifyCateDate']),
+
     cateChange(val){
       this.$emit('input',val)
     
-      //共享品类的cate
-        this.ModifyCateDate(val)
+ 
     },
     addCateList(){
       //获取品类
         this.$http.fetchGetCate({}).then(res=>{
           //得到品类
-        this.cateList=res.data.data.list
-        
-       
-       
+        this.cateList=res.data.data.list   
       })
     },
-    //
+   
    
   },
   mounted(){

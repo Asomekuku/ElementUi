@@ -15,12 +15,12 @@
                     border
                     style="width: 100%">
                     <el-table-column
-                    prop="cate"
+                    prop="name"
                     label="中文品类"
                     width="180">
                     </el-table-column>
                     <el-table-column
-                    prop="cate_zh"
+                    prop="cate"
                     label="英文品类"
                     width="180">
                     </el-table-column>
@@ -33,9 +33,9 @@
                     
                     <el-table-column
                     width="180"
-                    prop="create_time"
-                    label="时间">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                    
+                    label="操作">
+                        <el-button type="text" size="small">查看</el-button>
                         <el-button type="text" size="small">编辑</el-button>
                     </el-table-column>
                     
@@ -43,32 +43,33 @@
 
                 
             </template>
-
         </div>
+        
   </div>
 </template>
 
 <script>
+
 export default {
+  
     data(){
         return{
             shop_name:'',//查询名称
             list:[],//查询到的数据
+            
         }
     },
     methods:{
         //查询
         search(){
-            this.$http.fetchSearch({cate:this.shop_name}).then(res=>{
-                
+            this.$http.fetchGetName({name:this.shop_name}).then(res=>{
                 if(res.data.err){
-                    //有错误
-                    this.$message.error('错了哦，这是一条错误消息')
+                    //有一个错误
+
                 }else{
-                    //成功
-                   this.list =res.data.data.data
-                   this.shop_name=''
+                    this.list=res.data.data.list
                 }
+                
             })
         }
     }

@@ -30,16 +30,23 @@
             <el-button type="primary" @click="add">添加</el-button>
         </el-col>
       </el-row>
-      
+      <!-- 下拉菜单 0-->
+        <cateSelect v-model="value" />
   </div>
 </template>
 
 <script>
+//下拉菜单
+import {cateSelect} from '@/components/'
 export default {
+    components:{
+        cateSelect
+    },
     data(){
         return{
             catezh:'',
-            cateen:''
+            cateen:'',
+            value:'',//品类cate
         }
     },
     methods:{
@@ -50,6 +57,8 @@ export default {
             }
             this.$http.fetchAddCate(data).then(res=>{
                 console.log(res)
+                this.catezh=''
+                this.cateen=''
             })
         }
     }
